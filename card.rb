@@ -24,7 +24,7 @@ class Deck
     # @cards << Card.new(:jack, :diamonds)
     # @cards << Card.new(3, :clubs)
     
-    @suits.each do |suit|
+    suits.each do |suit|
       # build array 1..10
       # push faces through once
     end
