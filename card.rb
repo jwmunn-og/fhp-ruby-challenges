@@ -11,6 +11,7 @@ class Card
   
   def self.random_card
     Card.new(rand(10), :spades)
+    # comment
   end
 
 end
