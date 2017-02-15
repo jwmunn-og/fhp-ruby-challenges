@@ -18,43 +18,43 @@ end
 
 class Deck
   def initialize
-    @cards = []
-    suits = [:spades, :diamonds, :clubs, :hearts]
-    rank = []
-    # @cards << Card.new(10, :spades)
-    # @cards << Card.new(:jack, :diamonds)
-    # @cards << Card.new(3, :clubs)
+    @deck = []
+    rank = [:ace, 2,3,4,5,6,7,8,9,10,:jack, :queen, :king]
+    suits = [:clubs, :hearts, :spades, :diamonds]
     
     suits.each do |suit|
-      # build array 1..10
-      # push faces through once
+      rank.each do |rank|
+        @deck << Card.new(rank, suit)
+      end
     end
-    
-    #for each suit :spades, :diamonds, :clubs, :hearts
-    #loop through 1..10, :jack, :queen, :king, :ace
     
   end
 
   def shuffle
-    @cards.shuffle!
+    @deck.shuffle!
   end
   
   def deal
-    top_card = @cards.shift
+    top_card = @deck.shift
     puts "#{top_card.rank} of #{top_card.suit}"
   end
   
 
-  # def output
-  #   @cards.each do |card|
-  #     card.output_card
-  #   end
-  # end
+  def output
+    @deck.each do |card|
+      card.output_card
+    end
+  end
   
 end
 
 deck = Deck.new
-deck.shuffle
-deck.deal
-
+# Check Deck build
 # deck.output
+deck.shuffle
+# Check Deck shuffle
+# deck.output
+puts "Here is the hand you've been dealt:"
+5.times do
+  deck.deal
+end
