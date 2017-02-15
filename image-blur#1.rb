@@ -1,6 +1,11 @@
 # Create Image class
 class Image 
-  def initialize
+  def initialize(image_data)
+    @image_data = image_data
+  end
+
+  def output_image
+    puts @image_data
   end
 end
 
