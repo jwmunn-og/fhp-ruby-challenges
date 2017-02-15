@@ -11,7 +11,6 @@ class Card
   
   def self.random_card
     Card.new(rand(10), :spades)
-    # comment
   end
 
 end
@@ -19,11 +18,11 @@ end
 class Deck
   def initialize
     @deck = []
-    rank = [:ace, 2,3,4,5,6,7,8,9,10,:jack, :queen, :king]
+    ranks = [:ace, 2,3,4,5,6,7,8,9,10,:jack, :queen, :king]
     suits = [:clubs, :hearts, :spades, :diamonds]
     
     suits.each do |suit|
-      rank.each do |rank|
+      ranks.each do |rank|
         @deck << Card.new(rank, suit)
       end
     end
@@ -54,7 +53,7 @@ deck = Deck.new
 deck.shuffle
 # Check Deck shuffle
 # deck.output
-puts "Here is the hand you've been dealt:"
+puts "5 card draw:"
 5.times do
   deck.deal
 end
