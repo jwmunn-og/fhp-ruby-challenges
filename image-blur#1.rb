@@ -1,4 +1,8 @@
 # Create Image class
+class Image 
+  def initialize
+  end
+end
 
 # Make this work
 image = Image.new([
