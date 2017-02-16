@@ -5,7 +5,9 @@ class Image
   end
 
   def output_image
-    puts @image_data
+    @image_data.each do |arr|
+      puts arr.join
+    end
   end
 end
 
