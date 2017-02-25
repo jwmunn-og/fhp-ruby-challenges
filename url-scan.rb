@@ -8,5 +8,9 @@ def count_html_tags(url, tag)
   puts "The site #{url} has #{tags.length} #{tag} tags"
 end
 
-count_html_tags("http://justinmunn.co", "img")
-count_html_tags("http://www.thefirehoseproject.com/", "div")
+url = "http://justinmunn.co"
+tags = ["a", "div", "img"]
+
+tags.each do |tag|
+  count_html_tags(url, tag)
+end
