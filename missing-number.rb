@@ -1,5 +1,23 @@
 def find_missing_number(sequence)
-  #your code here
+  arr = sequence.split
+  arr.sort!
+  
+  if arr.length === 0
+    puts 0
+  else
+    arr.each do |arr_item|
+      if arr_item != arr_item.to_i
+        puts arr_item
+      else
+        puts arr.inspect
+      end
+    end
+
+    # arr.each { |x| puts x.class }
+  end
+  
+  
+  
 end
 
 
