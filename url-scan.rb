@@ -6,9 +6,7 @@ def fetch_page(url)
 end
 
 def count_html_tags(page, tag)
-  pattern = /<#{tag}\b/
-  tags = page.scan(pattern)
-  return tags.length
+  page.scan(/<#{tag}\b/).length
 end
 
 sites = ["http://justinmunn.co", "http://www.thefirehoseproject.com/", "https://www.codewars.com"]
