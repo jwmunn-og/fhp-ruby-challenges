@@ -7,39 +7,23 @@ class Image
     coords = []
     @image_data.each_with_index do |row, row_idx|
       row.each_with_index do |col, col_idx|
-        if col == 1
-          coords << [row_idx, col_idx]
-        else
-          col
-        end
+        coords << [row_idx, col_idx] if col == 1
       end
     end
 
     coords.each do |row, col|
-      if col != 0
-        @image_data[row][col-1] = 1
-      end
-      if col != @image_data[0].length - 1
-        @image_data[row][col+1] = 1
-      end
-      if row != 0
-        @image_data[row-1][col] = 1
-      end
-      if row != @image_data.length - 1
-        @image_data[row+1][col] = 1
-      end
+      @image_data[row][col-1] = 1 if col != 0
+      @image_data[row][col+1] = 1 if col != @image_data[0].length - 1
+      @image_data[row-1][col] = 1 if row != 0
+      @image_data[row+1][col] = 1 if row != @image_data.length - 1
     end
-    
-    # puts coords.inspect
-
   end
 
   def output_image
-    @image_data.each do |arr|
-      puts arr.join
-    end
+    @image_data.each { |arr| puts arr.join }
     puts "\n"
   end
+
 end
 
 # Make this work
