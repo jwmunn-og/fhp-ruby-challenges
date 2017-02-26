@@ -1,7 +1,6 @@
 class Image 
   def initialize(image_data)
     @image_data = image_data
-    
   end
 
   def get_ones
@@ -15,8 +14,8 @@ class Image
   
   def blur_image
     @coords.each do |row, col|
-      @image_data[row][col-1] = 1 if col != 0
-      @image_data[row][col+1] = 1 if col != @image_data[0].length - 1
+      @image_data[row][col - 1] = 1 if col != 0
+      @image_data[row][col + 1] = 1 if col != @image_data[0].length - 1
       @image_data[row - 1][col] = 1 if row != 0
       @image_data[row + 1][col] = 1 if row != @image_data.length - 1
     end
@@ -33,7 +32,6 @@ class Image
     self.blur_image
     puts "Blurred Image:"
     self.output_image
-
     puts "------------"
   end
 
@@ -59,12 +57,12 @@ two_px_transform = Image.new([
 ])
 
 px_edge_transform = Image.new([
-  [0, 0, 0, 0],
-  [0, 0, 0, 1],
   [1, 0, 0, 0],
   [0, 0, 0, 0],
   [0, 0, 0, 0],
-  [0, 0, 1, 0]
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 1]
 ])
 
 puts "Original 1px Transform Image:"
