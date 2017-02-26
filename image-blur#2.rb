@@ -5,9 +5,9 @@ class Image
   
   def blur_image
     coords = []
-    @image_data.each_with_index do |row, row_idx|
-      row.each_with_index do |col, col_idx|
-        coords << [row_idx, col_idx] if col == 1
+    @image_data.each_with_index do |row, row_index|
+      row.each_with_index do |col, col_index|
+        coords << [row_index, col_index] if col == 1
       end
     end
 
@@ -22,6 +22,15 @@ class Image
   def output_image
     @image_data.each { |arr| puts arr.join }
     puts "\n"
+  end
+
+  def output_original_and_blurred_image
+    self.output_image
+    self.blur_image
+    puts "Blurred Image:"
+    self.output_image
+
+    puts "------------"
   end
 
 end
@@ -54,6 +63,11 @@ px_edge_transform = Image.new([
   [0, 0, 1, 0]
 ])
 
-px_edge_transform.output_image
-px_edge_transform.blur_image
-px_edge_transform.output_image
+puts "Original 1px Transform Image:"
+one_px_transform.output_original_and_blurred_image
+
+puts "Original 2px Transform Image:"
+two_px_transform.output_original_and_blurred_image
+
+puts "Original Edge Pixels Image:"
+px_edge_transform.output_original_and_blurred_image
