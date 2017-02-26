@@ -1,34 +1,29 @@
-# Image blur #1
-# Create Image class
 class Image 
   def initialize(image_data)
     @image_data = image_data
   end
 
-# ark = ['cat', 'dog', 'pig', 'goat']
-# ark2 = ark.each_with_index.map do |a, i|
-#    if i % 2 == 1
-#       a.capitalize.reverse
-#    else
-#       a
-#    end
-# end   
-# puts ark2.join(', ')
-
 
   def blur_image
-    # @image_data[3][1] = 0
-    blurred_image = @image_data.each_with_index.map do |row, row_idx|
-      # blur pixels
-      row.each_with_index.map do |col, col_idx|
+    coords = []
+    @image_data.each_with_index do |row, row_idx|
+      row.each_with_index do |col, col_idx|
         if col == 1
-          row[col_idx - 1] = 1
+          coords << [row_idx, col_idx]
         else
           col
         end
       end
-      puts row.join
     end
+
+    coords.each do |x|
+      @image_data[x[0]][x[1]-1] = 1
+      @image_data[x[0]][x[1]+1] = 1
+      @image_data[x[0]-1][x[1]] = 1
+      @image_data[x[0]+1][x[1]] = 1
+    end
+    
+    # puts coords.inspect
 
   end
 
@@ -68,5 +63,6 @@ px_edge_transform = Image.new([
   [0, 0, 0, 0]
 ])
 
-two_px_transform.output_image
-two_px_transform.blur_image
+px_edge_transform.output_image
+px_edge_transform.blur_image
+px_edge_transform.output_image
