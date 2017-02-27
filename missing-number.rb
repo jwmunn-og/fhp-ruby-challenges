@@ -9,12 +9,15 @@ def find_missing_number(sequence)
     arr.map! do |arr_item|
         arr_item.to_i
     end
-    # p arr
     if arr[-1] == 0
       p 1
     else
       arr3 = arr2 - arr
-      p arr3.pop
+      if arr3[0] == nil
+        p 0
+      else
+        p arr3.pop
+      end
     end
   end  
 end
