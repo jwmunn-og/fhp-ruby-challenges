@@ -1,7 +1,5 @@
 def nthterm(first, n, c)
-  
-  n.times { |i| [first] << arr[i] + c}
-  p [n]
+  first + (n * c)
 end
 
-nthterm(1, 2, 3)
+p nthterm(1, 2, 3)
