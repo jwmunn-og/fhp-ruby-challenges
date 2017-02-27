@@ -1,13 +1,7 @@
 class Ghost
-  def assign_color
-    colors = %w[white yellow purple red]
-    color = colors.shuffle.shift
+   def color
+    %w(white yellow purple red).sample
   end
-
-  def color
-    p self.assign_color.to_s
-  end
-  
 end
 
 ghost = Ghost.new
