@@ -6,8 +6,6 @@ def grader(score)
     when 0.6..0.7; "D"
     else "F"
   end
-  
-  
 end
 
 p grader(0.7) # "C"
