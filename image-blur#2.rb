@@ -65,11 +65,18 @@ px_edge_transform = Image.new([
   [0, 0, 0, 1]
 ])
 
-puts "Original 1px Transform Image:"
-one_px_transform.output_original_and_blurred_image
+test = Image.new([
+  [0]
+])
 
-puts "Original 2px Transform Image:"
-two_px_transform.output_original_and_blurred_image
+# puts "Original 1px Transform Image:"
+# one_px_transform.output_original_and_blurred_image
 
-puts "Original Edge Pixels Image:"
-px_edge_transform.output_original_and_blurred_image
+# puts "Original 2px Transform Image:"
+# two_px_transform.output_original_and_blurred_image
+
+# puts "Original Edge Pixels Image:"
+# px_edge_transform.output_original_and_blurred_image
+
+puts "Original 1px Image:"
+test.output_original_and_blurred_image
