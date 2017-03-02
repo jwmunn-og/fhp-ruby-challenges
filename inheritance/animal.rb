@@ -25,24 +25,18 @@ end
 class GoldenRetriever < Dog
   def fetch
     puts "running and getting it"
-  end
+    end
 end
 
+class Poodle < Dog
+end
+
+
 animal = Animal.new
-animal.eat
 
-dog = Dog.new
-dog.bark
-
-cat = Cat.new
-cat.eat
-cat.meow
-
+dog  = Dog.new
+cat  = Cat.new
 duck = Duck.new
-duck.eat
-duck.quack
+gr   = GoldenRetriever.new
 
-gr = GoldenRetriever.new
-gr.eat
-gr.bark
-gr.fetch
+puts gr.is_a?(Dog)
