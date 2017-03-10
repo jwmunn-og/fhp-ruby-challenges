@@ -33,15 +33,6 @@ class Image
     puts "\n"
   end
 
-  def output_original_and_blurred_image
-    self.output_image
-    self.get_ones
-    self.blur_image
-    puts "Blurred Image:"
-    self.output_image
-    puts "------------"
-  end
-
   def output_manhattan_image(blur_amount)
     self.output_image
     puts "Manhattan Blurred Image:"
@@ -51,7 +42,7 @@ class Image
 
 end
 
-# Make this cases work
+# Make these cases work
 one_px_transform = Image.new([
   [0, 0, 0, 0],
   [0, 0, 0, 0],
@@ -79,19 +70,6 @@ px_edge_transform = Image.new([
   [0, 0, 0, 1]
 ])
 
-test = Image.new([
-  [0]
-])
-
-# puts "Original 1px Transform Image:"
-# one_px_transform.output_manhattan_image(3)
-
-# puts "Original 2px Transform Image:"
-# two_px_transform.output_manhattan_image(2)
-
 puts "Original Edge Pixels Image:"
-px_edge_transform.output_manhattan_image(1)
-
-# puts "Original 1px Image:"
-# test.output_original_and_blurred_image
+one_px_transform.output_manhattan_image(2)
 
