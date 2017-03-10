@@ -8,10 +8,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script>
     $(function(){
+      var h2Element = $('h2');
+      var times = 0
+      h2Element.html("I got clicked " + times+ " times.");
       var onClickFunction = function(){
-      $('h2').html('You clicked me!');
-    };
-      $('h2').click(onClickFunction);
+        times = times + 1;
+        h2Element.html("I got clicked " + times + " times.");
+      };
+      h2Element.click(onClickFunction);
     });
   </script>
   <h1 class="headline">Hello</h1>
