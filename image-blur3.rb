@@ -14,7 +14,7 @@ class Image
   end
   
   def blur_image(coords)
-    image_copy = @image_data
+    image_copy = Marshal.load(Marshal.dump(@image_data))
     coords.each do |row, col|
       image_copy[row][col - 1] = 1 if col != 0
       image_copy[row][col + 1] = 1 if col != image_copy[0].length - 1
@@ -27,7 +27,7 @@ class Image
    def manhattan_blur(num)
     num.times do 
       coords = self.get_ones
-      self.blur_image coords
+      self.blur_image(coords)
     end
   end
 

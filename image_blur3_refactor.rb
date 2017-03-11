@@ -4,25 +4,23 @@ class Image
   end
 
   def get_ones
-    coords = []
+    @coords = []
     @image_data.each_with_index do |row, row_index|
       row.each_with_index do |col, col_index|
-        coords << [row_index, col_index] if col == 1
+        @coords << [row_index, col_index] if col == 1
       end
     end
-    return coords
   end
   
   def blur_image
-    coords = self.get_ones
-    image_data_copy = @image_data.clone
-    coords.each do |row, col|
-      image_data_copy[row][col - 1] = 1 if col != 0
-      image_data_copy[row][col + 1] = 1 if col != image_data_copy[0].length - 1
-      image_data_copy[row - 1][col] = 1 if row != 0
-      image_data_copy[row + 1][col] = 1 if row != image_data_copy.length - 1
+    complex_copy = @image_data.clone
+    @coords.each do |row, col|
+      complex_copy[row][col - 1] = 1 if col != 0
+      complex_copy[row][col + 1] = 1 if col != complex_copy[0].length - 1
+      complex_copy[row - 1][col] = 1 if row != 0
+      complex_copy[row + 1][col] = 1 if row != complex_copy.length - 1
     end
-    image_data_copy.each { |arr| puts arr.join }
+    complex_copy.each { |arr| puts arr.join }
     puts "\n"
   end
 
@@ -84,3 +82,5 @@ test = Image.new([
 
 puts "Original 2px Transform Image:"
 two_px_transform.output_original_and_blurred_image
+puts "Result of Original"
+one_px_transform.output_original_image
