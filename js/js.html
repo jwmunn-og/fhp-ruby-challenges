@@ -9,6 +9,7 @@
 </head>
 <body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="jquery.countdown.min.js"></script>
   <script>
     var hash = {
       "1": "One",
@@ -47,5 +48,15 @@
   <hr />
   <input id="detail" />
   <button id="button">Click Me</button>
+  <hr />
+  <div id="getting-started"></div>
+  <script type="text/javascript">
+    $("#getting-started")
+    .countdown("2017/07/24", function(event) {
+      $(this).text(
+        event.strftime('%D days %H:%M:%S')
+      );
+    });
+  </script>
 </body>
 </html>
