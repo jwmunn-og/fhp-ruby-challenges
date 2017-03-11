@@ -14,13 +14,13 @@
     }
     $(function(){
       var h2Element = $('h2');
-      var times = 0
-      h2Element.html("I got clicked " + times+ " times.");
-      var onClickFunction = function(){
-        times = times + 1;
-        h2Element.html("I got clicked " + times + " times.");
-      };
-      h2Element.click(onClickFunction);
+     
+      h2Element.click(function(){
+        $.get( "http://www.catfact.info/api/v1/facts.json?page=1&per_page=3", function( data ) {
+         var detail = data.facts[0].details;
+         h2Element.html(detail);
+        });
+      });
     });
   </script>
   <h1 class="headline">Hello</h1>
