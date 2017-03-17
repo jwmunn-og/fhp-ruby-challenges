@@ -3,12 +3,6 @@ class Image
     @image_data = image_data
   end
 
-  def build_copy
-    complex_copy = Marshal.load(Marshal.dump(@image_data))
-    return complex_copy
-  end
-  
-
   def get_ones
     coords = []
     @image_data.each_with_index do |row, row_index|

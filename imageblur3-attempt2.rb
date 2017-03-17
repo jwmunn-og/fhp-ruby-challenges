@@ -1,17 +1,19 @@
-class Image
+class Image 
   def initialize(image_data)
     @image_data = image_data
+    freeze
   end
 
   def build_copy
-    complex_copy = Marshal.load(Marshal.dump(@image_data))
-    return complex_copy
+    @complex_copy = Marshal.load(Marshal.dump(@image_data))
+    puts @complex_copy.each { |arr| puts arr.join }
+    puts "\n"
   end
 
   def get_ones
     coords = []
-    @image_data.each_with_index do |row, row_index|
-      row.each_with_index do |col, col_index|
+    @image_data.map.with_index do |row, row_index|
+      row.map.with_index do |col, col_index|
         coords << [row_index, col_index] if col == 1
       end
     end
@@ -19,14 +21,14 @@ class Image
   end
   
   def blur_image
-    image_copy = Marshal.load(Marshal.dump(@image_data))
-    coords.each do |row, col|
-      image_copy[row][col - 1] = 1 if col != 0
-      image_copy[row][col + 1] = 1 if col != image_copy[0].length - 1
-      image_copy[row - 1][col] = 1 if row != 0
-      image_copy[row + 1][col] = 1 if row != image_copy.length - 1
+    coords = self.get_ones
+    complex_copy = self.build_copy
+    coords.collect do |row, col|
+      complex_copy[row][col - 1] = 1 if col != 0
+      complex_copy[row][col + 1] = 1 if col != complex_copy[0].length - 1
+      complex_copy[row - 1][col] = 1 if row != 0
+      complex_copy[row + 1][col] = 1 if row != complex_copy.length - 1
     end
-    return image_copy
   end
 
    def manhattan_blur(num)
@@ -44,9 +46,9 @@ class Image
   def output_manhattan_image(blur_amount)
     self.output_image
     puts "Manhattan Blurred Image:"
+    self.build_copy
     self.manhattan_blur(blur_amount)
     self.output_image
-    puts "----"
   end
 
 end
@@ -79,8 +81,10 @@ px_edge_transform = Image.new([
   [0, 0, 0, 1]
 ])
 
-puts "Original Edge Pixels Image:"
-one_px_transform.output_manhattan_image(2)
+# puts "Original Edge Pixels Image:"
+# one_px_transform.output_manhattan_image(2)
 
-one_px_transform.output_manhattan_image(1)
+# puts "Again:"
+# one_px_transform.output_manhattan_image(1)
 
+one_px_transform.build_copy

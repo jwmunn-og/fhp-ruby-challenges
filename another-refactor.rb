@@ -1,12 +1,14 @@
 class Image 
+  attr_accessor :image_data, :copy
   def initialize(image_data)
     @image_data = image_data
+    @copy = Marshal.load(Marshal.dump(@image_data))
   end
 
-  def build_copy
-    complex_copy = Marshal.load(Marshal.dump(@image_data))
-    return complex_copy
+  def reset_image
+    @image_data = @copy
   end
+
   
 
   def get_ones
@@ -21,28 +23,38 @@ class Image
   
   def blur_image
     coords = self.get_ones
-    complex_copy = Marshal.load(Marshal.dump(@image_data))
     coords.each do |row, col|
-      complex_copy[row][col - 1] = 1 if col != 0
-      complex_copy[row][col + 1] = 1 if col != complex_copy[0].length - 1
-      complex_copy[row - 1][col] = 1 if row != 0
-      complex_copy[row + 1][col] = 1 if row != complex_copy.length - 1
+      @image_data[row][col - 1] = 1 if col != 0
+      @image_data[row][col + 1] = 1 if col != @image_data[0].length - 1
+      @image_data[row - 1][col] = 1 if row != 0
+      @image_data[row + 1][col] = 1 if row != @image_data.length - 1
     end
-    complex_copy.each { |arr| puts arr.join }
-    puts "\n"
   end
 
-  def output_original_image
+  def manhattan_blur(num)
+    num.times do 
+      self.get_ones
+      self.blur_image
+    end
+  end
+
+  def output_image
     @image_data.each { |arr| puts arr.join }
     puts "\n"
   end
 
-  def output_original_and_blurred_image
-    self.output_original_image
+  def output_copy
+    @copy.each { |arr| puts arr.join }
+    puts "\n"
+  end
+
+  def output_original_and_blurred_image(amt)
+    self.output_image
     puts "Blurred Image:"
-    self.get_ones
-    self.blur_image
+    self.manhattan_blur(amt)
+    self.output_image
     puts "------------"
+    self.reset_image
   end
 
 end
@@ -88,7 +100,15 @@ test = Image.new([
 # puts "Original Edge Pixels Image:"
 # px_edge_transform.output_original_and_blurred_image
 
-puts "Original 2px Transform Image:"
-two_px_transform.output_original_and_blurred_image
-puts "Result of Original"
-two_px_transform.output_original_image
+# puts "Original 2px Transform Image:"
+# two_px_transform.output_original_and_blurred_image(2)
+# puts "Result of Original"
+# two_px_transform.output_copy
+# puts "1px Transform Image:"
+# two_px_transform.output_original_and_blurred_image(1)
+puts "3px Transform Image:"
+two_px_transform.output_original_and_blurred_image(1)
+puts "1px Transform Image:"
+two_px_transform.output_original_and_blurred_image(1)
+puts "0px Transform Image:"
+two_px_transform.output_original_and_blurred_image(0)

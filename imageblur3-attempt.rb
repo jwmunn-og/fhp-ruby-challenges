@@ -2,12 +2,7 @@ class Image
   def initialize(image_data)
     @image_data = image_data
   end
-
-  def build_copy
-    complex_copy = Marshal.load(Marshal.dump(@image_data))
-    return complex_copy
-  end
-  
+    
 
   def get_ones
     coords = []
@@ -19,17 +14,27 @@ class Image
     return coords
   end
   
-  def blur_image
-    coords = self.get_ones
+  def blur_image(num)
+    
     complex_copy = Marshal.load(Marshal.dump(@image_data))
-    coords.each do |row, col|
-      complex_copy[row][col - 1] = 1 if col != 0
-      complex_copy[row][col + 1] = 1 if col != complex_copy[0].length - 1
-      complex_copy[row - 1][col] = 1 if row != 0
-      complex_copy[row + 1][col] = 1 if row != complex_copy.length - 1
+
+     num.times do
+       coords = self.get_ones
+       coords.each do |row, col|
+        complex_copy[row][col - 1] = 1 if col != 0
+        complex_copy[row][col + 1] = 1 if col != complex_copy[0].length - 1
+        complex_copy[row - 1][col] = 1 if row != 0
+        complex_copy[row + 1][col] = 1 if row != complex_copy.length - 1
+      end
     end
-    complex_copy.each { |arr| puts arr.join }
-    puts "\n"
+    complex_copy.each {|arr| puts arr.join }
+  end
+
+  def manhattan_blur(num)
+
+    num.times do 
+      self.blur_image
+    end
   end
 
   def output_original_image
@@ -37,12 +42,18 @@ class Image
     puts "\n"
   end
 
-  def output_original_and_blurred_image
+  def output_original_and_blurred_image(blur_amount)
     self.output_original_image
     puts "Blurred Image:"
-    self.get_ones
-    self.blur_image
+    self.blur_image(blur_amount)
     puts "------------"
+  end
+
+  def output_manhattan_image(blur_amount)
+    self.output_original_image
+    puts "Manhattan Blurred Image:"
+    self.manhattan_blur(blur_amount)
+    self.output_image
   end
 
 end
@@ -89,6 +100,7 @@ test = Image.new([
 # px_edge_transform.output_original_and_blurred_image
 
 puts "Original 2px Transform Image:"
-two_px_transform.output_original_and_blurred_image
-puts "Result of Original"
-two_px_transform.output_original_image
+two_px_transform.blur_image(2)
+
+puts "Original 1px Transform Image:"
+two_px_transform.blur_image(1)

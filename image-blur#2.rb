@@ -15,14 +15,14 @@ class Image
   
   def blur_image
     coords = self.get_ones
-    image_data_copy = @image_data.clone
+    complex_copy = Marshal.load(Marshal.dump(@image_data))
     coords.each do |row, col|
-      image_data_copy[row][col - 1] = 1 if col != 0
-      image_data_copy[row][col + 1] = 1 if col != image_data_copy[0].length - 1
-      image_data_copy[row - 1][col] = 1 if row != 0
-      image_data_copy[row + 1][col] = 1 if row != image_data_copy.length - 1
+      complex_copy[row][col - 1] = 1 if col != 0
+      complex_copy[row][col + 1] = 1 if col != complex_copy[0].length - 1
+      complex_copy[row - 1][col] = 1 if row != 0
+      complex_copy[row + 1][col] = 1 if row != complex_copy.length - 1
     end
-    image_data_copy.each { |arr| puts arr.join }
+    complex_copy.each { |arr| puts arr.join }
     puts "\n"
   end
 
@@ -83,4 +83,6 @@ test = Image.new([
 # px_edge_transform.output_original_and_blurred_image
 
 puts "Original 2px Transform Image:"
-two_px_transform.output_original_and_blurred_image
+two_px_transform.output_original_and_blurred_image(3)
+puts "Result of Original"
+two_px_transform.output_original_image
