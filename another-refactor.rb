@@ -1,19 +1,22 @@
 class Image 
-  attr_accessor :image_data, :copy
   def initialize(image_data)
     @image_data = image_data
     @copy = Marshal.load(Marshal.dump(@image_data))
   end
 
   def reset_image
-    @image_data = @copy
+    @image_data = Marshal.load(Marshal.dump(@copy))
   end
 
+  def temp_data
+    temp = Marshal.load(Marshal.dump(@image_data))
+    return temp
+  end
   
 
-  def get_ones
+  def get_ones(temp)
     coords = []
-    @image_data.each_with_index do |row, row_index|
+    temp.each_with_index do |row, row_index|
       row.each_with_index do |col, col_index|
         coords << [row_index, col_index] if col == 1
       end
@@ -21,21 +24,25 @@ class Image
     return coords
   end
   
-  def blur_image
-    coords = self.get_ones
+  def blur_image(temp)
+    
+    coords = self.get_ones(temp)
     coords.each do |row, col|
-      @image_data[row][col - 1] = 1 if col != 0
-      @image_data[row][col + 1] = 1 if col != @image_data[0].length - 1
-      @image_data[row - 1][col] = 1 if row != 0
-      @image_data[row + 1][col] = 1 if row != @image_data.length - 1
+      temp[row][col - 1] = 1 if col != 0
+      temp[row][col + 1] = 1 if col != temp[0].length - 1
+      temp[row - 1][col] = 1 if row != 0
+      temp[row + 1][col] = 1 if row != temp.length - 1
     end
+    return temp
   end
 
   def manhattan_blur(num)
+    temp = self.temp_data
+    temp1 = nil
     num.times do 
-      self.get_ones
-      self.blur_image
+      temp1 = self.blur_image(temp)
     end
+    return temp1
   end
 
   def output_image
@@ -51,10 +58,11 @@ class Image
   def output_original_and_blurred_image(amt)
     self.output_image
     puts "Blurred Image:"
-    self.manhattan_blur(amt)
-    self.output_image
+    blurred_image_data = self.manhattan_blur(amt)
+    p blurred_image_data
+    blurred_image = self.class.new(blurred_image_data)
+    blurred_image.output_image
     puts "------------"
-    self.reset_image
   end
 
 end
@@ -107,8 +115,8 @@ test = Image.new([
 # puts "1px Transform Image:"
 # two_px_transform.output_original_and_blurred_image(1)
 puts "3px Transform Image:"
-two_px_transform.output_original_and_blurred_image(1)
+two_px_transform.output_original_and_blurred_image(3)
 puts "1px Transform Image:"
 two_px_transform.output_original_and_blurred_image(1)
-puts "0px Transform Image:"
-two_px_transform.output_original_and_blurred_image(0)
+# puts "0px Transform Image:"
+# two_px_transform.output_original_and_blurred_image(0)
