@@ -46,7 +46,7 @@ class Image
   end
 
   def output_image
-    @image_data.each { |arr| puts arr.join }
+    @image_data.each { |arr| puts arr.join(" ") }
     puts "\n"
   end
 
