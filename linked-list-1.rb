@@ -22,3 +22,14 @@ node2 = LinkedListNode.new(99, node1)
 node3 = LinkedListNode.new(12, node2)
 
 print_values(node3)
+
+puts "-------"
+
+# revlist = reverse_list(node3)
+
+# print_values(revlist)
+
+# Desired output: 
+# 12 --> 99 --> 37 --> nil
+# ------
+# 37 --> 99 --> 12 --> nil
