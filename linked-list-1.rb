@@ -62,7 +62,6 @@ def reverse_list(list)
     new_value = reversed_stack.pop
 
     while new_value != nil
-        p new_value
 
         if new_list == nil
             new_list = new_value
@@ -72,7 +71,6 @@ def reverse_list(list)
             while last_node.next_node != nil
                 last_node = last_node.next_node
             end
-            p last_node
             last_node.next_node = new_value
             ####
             new_value.next_node = nil
