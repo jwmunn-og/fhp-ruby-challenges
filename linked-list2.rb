@@ -23,13 +23,14 @@ end
 def reverse_list(list, previous=nil)
 
   # Option 1
-  # while list != nil
-  #   old_next_node = list.next_node
-  #   list.next_node = previous
-  #   previous = list
-  #   list = old_next_node
-  # end
+  while list != nil
+    old_next_node = list.next_node
+    list.next_node = previous
+    previous = list
+    list = old_next_node
+  end
 
+print_values(previous)
 
   # Recursion
   # def recursion
@@ -41,10 +42,10 @@ def reverse_list(list, previous=nil)
   # return previous
 
   # Option 2
-  while list
-      previous_next_node = list.next_node
-      list.next_node = previous
-  end
+  # while list
+  #     previous_next_node = list.next_node
+  #     list.next_node = previous
+  # end
     
 end
 
@@ -56,11 +57,11 @@ print_values(node3)
 
 puts "-------"
 
-# reverse_list(node3)
+reverse_list(node3)
 
 # print_values(node1)
 
-puts node3.reverse_reverse
+
 
 # Desired output: 
 # 12 --> 99 --> 37 --> nil
