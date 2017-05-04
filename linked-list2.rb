@@ -32,6 +32,8 @@ def reverse_list(list, previous=nil)
 
 print_values(previous)
 
+  
+
   # Recursion
   # def recursion
   #   return "#something" if list.value == nil
@@ -49,6 +51,23 @@ print_values(previous)
     
 end
 
+def recurrsive_reverse(list)
+  # Work for single node list
+  # 37 -> nil
+  return list if list.next_node == nil
+  # remove node until 1 remains
+  # 99 -> 37 -> nil
+  # 99 -> nil
+  # 37 -> 99 -> nil
+  # 37 -> 99 -> nil
+  current_node = list
+  current_node.next_node = nil
+
+  list = list.next_node
+  recurrsive_reverse(list)
+  list.next_node = current_node
+end
+
 node1 = LinkedListNode.new(37)
 node2 = LinkedListNode.new(99, node1)
 node3 = LinkedListNode.new(12, node2)
@@ -60,8 +79,6 @@ puts "-------"
 reverse_list(node3)
 
 # print_values(node1)
-
-
 
 # Desired output: 
 # 12 --> 99 --> 37 --> nil
