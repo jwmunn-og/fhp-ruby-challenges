@@ -19,7 +19,6 @@ def breadth_first(node, search_value)
   queue = []
   queue.push(node)
 
-  
   while queue != 0
     n = queue.shift
     # puts n.payload # Output to verifiy search order
@@ -48,7 +47,7 @@ shallow_fifth_node = Tree.new(5, [ninth_node])
 # The "Trunk" of the tree
 trunk   = Tree.new(2, [seventh_node, shallow_fifth_node])
 
-puts "Depth First Order:"
+puts "Depth First:"
 depth_first(trunk, 11)
-puts "---"
+puts "Breadth First:"
 breadth_first(trunk, 11)
