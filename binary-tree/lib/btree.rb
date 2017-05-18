@@ -6,83 +6,66 @@ class BinaryTree
     @left = left
     @right = right
   end
-
-  def self.children
-    [@left, @right].compact
-  end
-
-  # def children?
-  #   @left != nil || @right != nil
-  # end
-
-  # def no_children?
-  #   !children?
-  # end
 end
 
 class BTreeSort
-  # initialize anything ??
-
   def self.build(array)
     first = array[0]
     trunk = BinaryTree.new(first, nil, nil)
     rest = array.last(array.length - 1)
 
     
+   
     # loop through rest array
     rest.each do |i|
       queue = []
       queue.push(trunk)
-
+     
       node = BinaryTree.new(i, nil, nil)
       # find where node should go in the tree
-      while queue != 0
+      while queue.length != 0
         n = queue.shift
-        # keep going through children until there are no children
-        if n.children
-          # insert element in place of parent left or right nil
-          if n.payload > i
-            n.left = node
-          else
-             n.right = node
-          end
+
+        if i < n.payload
+            if n.left == nil
+                n.left = node
+             else
+                 queue.push(n.left)
+             end
         else
-          # push children into the queue to keep searching through children
-          n.children.each do |child|
-            queue.push(child)
-          end
+            if n.right == nil
+                n.right = node
+             else
+                 queue.push(n.right)
+             end
         end
+        
       end
     end
 
     return trunk
   end
 
+  def self.in_order(node, sorted_array)
+
+    return "Done" if node == nil 
+        
+    self.in_order(node.left, sorted_array)
+    sorted_array << node.payload
+    self.in_order(node.right, sorted_array)
+
+    return sorted_array
+  end
+
   def self.sort(array)
     trunk = self.build(array)
     sorted_array = []
-    
-    # depth first structure
-    trunk.children.each do |child|
-      sorted_array << child
-      self.sort(child)
-    end
 
-    return sorted_array
-    # build new sorted array through Depth First Search payload
+    return self.in_order(trunk, sorted_array)
   end
 
 end
 
-
-
-# seven = BinaryTree.new(7, nil, nil)
-# five  = BinaryTree.new(5, nil, nil)
-# four  = BinaryTree.new(4, nil, nil)
-# six   = BinaryTree.new(6, nil, seven)
-# three = BinaryTree.new(3, nil, six)
-# two   = BinaryTree.new(2, four, five)
-# trunk = BinaryTree.new(1, two, three)
 
 array = [7, 4, 9, 1, 6, 14, 10]
 

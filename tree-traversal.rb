@@ -9,7 +9,7 @@ end
 
 def depth_first(node, search_value)
   # puts node.payload # Output to verifiy search order
-  return p node if node.payload == search_value
+  return node if node.payload == search_value
   node.children.each do |child|
     depth_first(child, search_value)
   end
@@ -19,15 +19,12 @@ def breadth_first(node, search_value)
   queue = []
   queue.push(node)
 
-  while queue != 0
+  while queue.length != 0
     n = queue.shift
     # puts n.payload # Output to verifiy search order
-    if n.payload == search_value
-      return p n
-    else
-      n.children.each do |child|
-        queue.push(child)
-      end
+    return n if n.payload == search_value
+    n.children.each do |child|
+      queue.push(child)
     end
   end
 
